@@ -1,5 +1,5 @@
 # odin-al
-OpenAL wrapper for Odin
+OpenAL binding for Odin
 
 Currently only working on windows.
 
