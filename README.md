@@ -1,6 +1,8 @@
 # odin-al
 OpenAL binding for Odin
 
+**NOTE: Requires 'OpenAL32.lib' to be placed inside the repo**
+
 Currently only working on windows.
 
 I recommend cloning this repo into Odin's shared collection
