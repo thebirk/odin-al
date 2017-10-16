@@ -1,7 +1,7 @@
 when ODIN_OS == "windows" {
-	foreign_library openal "OpenAL32.lib";
+	foreign import openal "OpenAL32.lib";
 } else when ODIN_OS == "linux" {
-	foreign_system_library openal "openal";
+	foreign import openal "system:openal";
 } else {
 	_ := compile_assert(false);
 }
