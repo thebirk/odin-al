@@ -32,28 +32,29 @@ CAPTURE_DEVICE_SPECIFIER         :: 0x310;
 CAPTURE_DEFAULT_DEVICE_SPECIFIER :: 0x311;
 CAPTURE_SAMPLES                  :: 0x312;
 
-Device  :: struct #ordered {};
-Context :: struct #ordered {};
+Device  :: struct {};
+Context :: struct {};
 
+@(default_calling_convention="c")
 foreign openal {
-	CreateContext      :: proc(device: ^Device, attrlist: ^i32) -> ^Context                              #cc_c #link_name "alcCreateContext" ---;
-	MakeContextCurrent :: proc(contex: ^Context ) -> u8                                                  #cc_c #link_name "alcMakeContextCurrent" ---;
-	ProcessContext     :: proc(contex: ^Context)                                                         #cc_c #link_name "alcProcessContext" ---;
-	SuspendContext     :: proc(contex: ^Context)                                                         #cc_c #link_name "alcSuspendContext" ---;
-	DestroyContext     :: proc(contex: ^Context)                                                         #cc_c #link_name "alcDestroyContext" ---;
-	GetCurrentContext  :: proc() -> ^Context                                                             #cc_c #link_name "alcGetCurrentContext" ---;
-	GetContextsDevice  :: proc(contex: ^Context) -> ^Device                                              #cc_c #link_name "alcGetContextsDevice" ---;
-	OpenDevice         :: proc(devicename: ^u8) -> ^Device                                               #cc_c #link_name "alcOpenDevice" ---;
-	CloseDevice        :: proc(device: ^Device) -> u8                                                    #cc_c #link_name "alcCloseDevice" ---;
-	GetError           :: proc(device: ^Device) -> i32                                                   #cc_c #link_name "alcGetError" ---;
-	IsExtensionPresent :: proc(device: ^Device, extname: ^u8) -> u8                                      #cc_c #link_name "alcIsExtensionPresent" ---;
-	GetProcAddress     :: proc(device: ^Device, funcname: ^u8) -> rawptr                                 #cc_c #link_name "alcGetProcAddress" ---;
-	GetEnumValue       :: proc(device: ^Device, enumname: ^u8) -> i32                                    #cc_c #link_name "alcGetEnumValue" ---;
-	GetString          :: proc(device: ^Device, param: i32) -> ^u8                                       #cc_c #link_name "alcGetString" ---;
-	GetIntegerv        :: proc(device: ^Device, param: i32, size: i32, data: ^i32)                       #cc_c #link_name "alcGetIntegerv" ---;
-	CaptureOpenDevice  :: proc(devicename: ^u8, frequency: u32, format: i32, buffersize: i32) -> ^Device #cc_c #link_name "alcCaptureOpenDevice" ---;
-	CaptureCloseDevice :: proc(device: ^Device) -> u8                                                    #cc_c #link_name "alcCaptureCloseDevice" ---;
-	CaptureStart       :: proc(device: ^Device)                                                          #cc_c #link_name "alcCaptureStart" ---;
-	CaptureStop        :: proc(device: ^Device)                                                          #cc_c #link_name "alcCaptureStop" ---;
-	CaptureSamples     :: proc(device: ^Device, buffer: ^u8, samples: i32)                               #cc_c #link_name "alcCaptureSamples" ---;
+	@(link_name="alcCreateContext")      CreateContext      :: proc(device: ^Device, attrlist: ^i32) -> ^Context                              ---;
+	@(link_name="alcMakeContextCurrent") MakeContextCurrent :: proc(contex: ^Context ) -> u8                                                  ---;
+	@(link_name="alcProcessContext")     ProcessContext     :: proc(contex: ^Context)                                                         ---;
+	@(link_name="alcSuspendContext")     SuspendContext     :: proc(contex: ^Context)                                                         ---;
+	@(link_name="alcDestroyContext")     DestroyContext     :: proc(contex: ^Context)                                                         ---;
+	@(link_name="alcGetCurrentContext")  GetCurrentContext  :: proc() -> ^Context                                                             ---;
+	@(link_name="alcGetContextsDevice")  GetContextsDevice  :: proc(contex: ^Context) -> ^Device                                              ---;
+	@(link_name="alcOpenDevice")         OpenDevice         :: proc(devicename: ^u8) -> ^Device                                               ---;
+	@(link_name="alcCloseDevice")        CloseDevice        :: proc(device: ^Device) -> u8                                                    ---;
+	@(link_name="alcGetError")           GetError           :: proc(device: ^Device) -> i32                                                   ---;
+	@(link_name="alcIsExtensionPresent") IsExtensionPresent :: proc(device: ^Device, extname: ^u8) -> u8                                      ---;
+	@(link_name="alcGetProcAddress")     GetProcAddress     :: proc(device: ^Device, funcname: ^u8) -> rawptr                                 ---;
+	@(link_name="alcGetEnumValue")       GetEnumValue       :: proc(device: ^Device, enumname: ^u8) -> i32                                    ---;
+	@(link_name="alcGetString")          GetString          :: proc(device: ^Device, param: i32) -> ^u8                                       ---;
+	@(link_name="alcGetIntegerv")        GetIntegerv        :: proc(device: ^Device, param: i32, size: i32, data: ^i32)                       ---;
+	@(link_name="alcCaptureOpenDevice")  CaptureOpenDevice  :: proc(devicename: ^u8, frequency: u32, format: i32, buffersize: i32) -> ^Device ---;
+	@(link_name="alcCaptureCloseDevice") CaptureCloseDevice :: proc(device: ^Device) -> u8                                                    ---;
+	@(link_name="alcCaptureStart")       CaptureStart       :: proc(device: ^Device)                                                          ---;
+	@(link_name="alcCaptureStop")        CaptureStop        :: proc(device: ^Device)                                                          ---;
+	@(link_name="alcCaptureSamples")     CaptureSamples     :: proc(device: ^Device, buffer: ^u8, samples: i32)                               ---;
 }
