@@ -1,9 +1,13 @@
-when ODIN_OS == "windows" {
+package al;
+
+import "core:os"
+
+when os.OS == "windows" {
 	foreign import openal "OpenAL32.lib";
-} else when ODIN_OS == "linux" {
+} else when os.OS == "linux" {
 	foreign import openal "system:openal";
 } else {
-	_ := compile_assert(false);
+	#assert(false);
 }
 
 /*
@@ -98,7 +102,7 @@ foreign openal {
 	@(link_name="alEnable")               enable                 :: proc(capability: i32)                                        ---;
 	@(link_name="alDisable")              disable                :: proc(capability: i32)                                        ---;
 	@(link_name="alIsEnabled")            is_enabled             :: proc(capability: i32) -> u8                                  ---;
-	@(link_name="alGetString")            get_string             :: proc(param: i32) -> ^u8                                      ---;
+	@(link_name="alGetString")            get_string             :: proc(param: i32) -> cstring                                      ---;
 	@(link_name="alGetBooleanv")          get_booleanv           :: proc(param: i32, data: ^u8)                                  ---;
 	@(link_name="alGetIntegerv")          get_integerv           :: proc(param: i32, data: ^i32)                                 ---;
 	@(link_name="alGetFloatv")            get_floatv             :: proc(param: i32, data: ^f32)                                 ---;
@@ -108,9 +112,9 @@ foreign openal {
 	@(link_name="alGetFloat")             get_float              :: proc(param: i32) -> f32                                      ---;
 	@(link_name="alGetDouble")            get_double             :: proc(param: i32) -> f64                                      ---;
 	@(link_name="alGetError")             get_error              :: proc() -> i32                                                ---;
-	@(link_name="alIsExtensionPresent")   is_extension_present   :: proc(extname: ^u8) -> u8                                     ---;
-	@(link_name="alGetProcAddress")       get_proc_address       :: proc(fname: ^u8) -> rawptr                                   ---;
-	@(link_name="alGetEnumValue")         get_enum_value         :: proc(ename: ^u8) -> i32                                      ---;
+	@(link_name="alIsExtensionPresent")   is_extension_present   :: proc(extname: cstring) -> u8                                     ---;
+	@(link_name="alGetProcAddress")       get_proc_address       :: proc(fname: cstring) -> rawptr                                   ---;
+	@(link_name="alGetEnumValue")         get_enum_value         :: proc(ename: cstring) -> i32                                      ---;
 	@(link_name="alListenerf")            listenerf              :: proc(param: i32, value: f32)                                 ---;
 	@(link_name="alListener3f")           listener3f             :: proc(param: i32, value1, value2, value3: f32)                ---;
 	@(link_name="alListenerfv")           listenerfv             :: proc(param: i32, values: ^f32)                               ---;
